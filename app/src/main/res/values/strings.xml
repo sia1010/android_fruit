@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UTP</string>
+    <string name="wrong_username_and_password_message">Wrong Username and Password!!!</string>
+    <string name="wrong_username_message">Wrong Username!!!</string>
+    <string name="wrong_password_message">Wrong Password!!!</string>
+    <string name="register"><u>Register Now</u></string>
+    <string name="username_exists">This username already exist. Please try another username</string>
+    <string name="empty_info">Please fill in all the required information</string>
+    <string name="password_different">Password and Confirm Password is not the same</string>
+    <string name="successfully_registered">Successfully Registered. Please return to login page.</string>
+</resources>
