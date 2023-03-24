@@ -6,23 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.fruit.databinding.*;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MenuPage extends AppCompatActivity {
 
-    ActivityMain2Binding binding;
+    ActivityMenupageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_menupage);
 
-        binding = ActivityMain2Binding.inflate(getLayoutInflater());
+        binding = ActivityMenupageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.imgBtnRick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginPage.class);
                     startActivity(intent);
                 } catch (Exception e){
                     e.printStackTrace();

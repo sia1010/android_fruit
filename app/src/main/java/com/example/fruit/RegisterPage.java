@@ -1,34 +1,26 @@
 package com.example.fruit;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Toast;
-import androidx.annotation.ColorInt;
+import android.view.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.example.fruit.databinding.ActivityMain2Binding;
-import com.example.fruit.databinding.ActivityMain3Binding;
+import com.example.fruit.databinding.*;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-public class MainActivity3 extends AppCompatActivity {
+public class RegisterPage extends AppCompatActivity {
 
-    ActivityMain3Binding binding;
+    ActivityRegisterpageBinding binding;
     Connection conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_registerpage);
 
-        binding = ActivityMain3Binding.inflate(getLayoutInflater());
+        binding = ActivityRegisterpageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -37,22 +29,27 @@ public class MainActivity3 extends AppCompatActivity {
                 ArrayList<String> usernameList = new ArrayList<>();
                 boolean hasDuplicateUsername = false;
 
+                // open the database
                 SQLiteDatabase mydatabase = openOrCreateDatabase("users", MODE_PRIVATE, null);
                 mydatabase.execSQL("CREATE TABLE IF NOT EXISTS users(username VARCHAR,password VARCHAR,gender VARCHAR,hobbyChess BOOLEAN,hobbyFootball BOOLEAN);");
 
+                // select the data from the table 'users'
                 Cursor selectSet = mydatabase.rawQuery("SELECT * FROM users", null);
-                selectSet.moveToFirst();
 
+                // loop through the table and get a list for all the usernames
+                selectSet.moveToFirst();
                 while(selectSet.moveToNext()){
                     usernameList.add(selectSet.getString(0));
                 }
 
+                // check if the username inputted by the user already exists
                 for (String username : usernameList){
                     if (binding.inpUsername.getText().toString().equals(username)){
                         hasDuplicateUsername = true;
                     }
                 }
 
+                // check conditions and make sure all data are valid
                 if(binding.inpUsername.getText().toString().equals("")
                         || binding.inpPassword.getText().toString().equals("")
                         || binding.inpConfirmPassword.getText().toString().equals("")
@@ -67,6 +64,7 @@ public class MainActivity3 extends AppCompatActivity {
                     binding.txtError.setText(R.string.username_exists);
                     binding.txtError.setVisibility(View.VISIBLE);
                 }else{
+                    // if all data are valid, add it to the database in the table 'users'
                     String gender = "";
                     if (binding.rdbMale.isChecked()){
                         gender = "Male";
